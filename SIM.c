@@ -69,7 +69,7 @@ int predict(PTE *pte) {
 int main(int argc, char *argv[]) {
     
     if (argc != 5) {
-        printf("Usage: ./SIM gshare <GPB> <RB> <Trace_FILE>\n");
+        printf("Usage: ./SIM gshare <GPB> <RB> <trace_file>\n");
         return 1;
     }
 

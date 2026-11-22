@@ -3,3 +3,4 @@ gobmk_trace.txt
 mcf_trace.txt
 SIM
 test.txt
+run_tests.sh
