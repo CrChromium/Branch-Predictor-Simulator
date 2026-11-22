@@ -88,13 +88,34 @@ int main(int argc, char *argv[]) {
     while (fscanf(fp, "%" SCNx64 " %c", &PC, &out) == 2) {
 
         taken = (out == 't');
+
+        uint32_t index = get_index((uint32_t)PC, M, N, GBHR);
+
+        PTE *pte = create_pte(index, pt);
+
+        if (predict(pte) != taken){
+            miss++;
+        }
+
+        update_counter(pte, taken);
+
+        GBHR = update_gbhr(GBHR, taken, N);
+
+        branches++;
     }
 
     double ratio = 0.0;
 
     ratio = (double)miss/branches;
 
+    printf("%d %d %f", M, N, ratio);
+
     fclose(fp);
+
+    for (int i = 0; i < (1 << M); i++){
+        free(pt[i]);
+    }
+    free(pt);
 
     return 0;
 }
